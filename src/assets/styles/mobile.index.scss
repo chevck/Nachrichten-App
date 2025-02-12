@@ -1,0 +1,210 @@
+@import "variables";
+
+@media screen and (max-width: 767px) {
+  // styles for mobile devices
+
+  .news-landing-container {
+    ._header {
+      padding: 0 20px;
+      margin-bottom: 10px;
+
+      .logo-section {
+        input {
+          display: none;
+        }
+      }
+    }
+
+    .mobile-search {
+      padding: 5px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      align-items: center;
+
+      i {
+        margin-right: 10px;
+      }
+
+      input {
+        border-radius: 25px;
+      }
+
+      .filter-btn {
+        border: none;
+        background: none;
+        padding: 5px;
+        border-radius: 6px;
+        padding: 10px 24px;
+
+        span.selected-category {
+          text-transform: uppercase;
+          font-weight: 700;
+        }
+      }
+    }
+
+    ._news-body {
+      padding: 20px;
+
+      .loading-screen {
+        overflow: hidden;
+      }
+
+      ._sources {
+        margin-bottom: 0;
+        margin-top: -10px;
+        ul {
+          display: flex;
+          gap: 12px;
+          flex-wrap: wrap;
+          row-gap: 0;
+
+          li {
+            background: gray;
+            border-radius: 15px;
+            padding: 5px 10px;
+
+            &::before {
+              display: none;
+            }
+
+            &.active {
+              color: $za_white;
+            }
+          }
+        }
+      }
+
+      ._categories {
+        display: none;
+      }
+
+      .news-content {
+        flex-direction: column;
+        align-items: unset;
+        gap: 5px;
+        margin-bottom: 25px;
+        padding-bottom: 20px;
+        border-bottom: 1px solid $za_black_dim;
+
+        .details {
+          width: 100%;
+
+          h6 {
+            width: 100%;
+            min-width: auto;
+          }
+
+          a {
+            display: none;
+          }
+        }
+        .mobile-read-link-button {
+          height: 45px;
+          font-size: 14px;
+          border-radius: 9px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 8px;
+          margin-top: 6px;
+          border: none;
+          background-color: $za_black_dim;
+          color: $za_black;
+          text-decoration: none;
+        }
+      }
+
+      .footer {
+        gap: 15px;
+        flex-direction: column-reverse;
+        //   margin-bottom: 70px;
+
+        div {
+          display: flex;
+          gap: 10px;
+          align-items: center;
+          p {
+            display: block;
+          }
+        }
+
+        .custom-pagination ul {
+          gap: 7px;
+          flex-flow: wrap;
+          justify-content: center;
+        }
+
+        select {
+          width: 75px;
+          margin-right: 0;
+        }
+      }
+    }
+  }
+
+  .offcanvas-categories {
+    .offcanvas-header {
+      border-bottom: 1px solid $za_black_dim;
+
+      h5 {
+        font-weight: bold;
+        font-size: 16px;
+      }
+    }
+    .offcanvas-body {
+      ._categories {
+        ul {
+          padding-left: 0;
+          list-style: none;
+
+          li {
+            height: 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            border-radius: 5px;
+
+            &.active {
+              background-color: $za_black_dim;
+              &::after {
+                display: block;
+                width: 40px;
+                content: "✓";
+                margin-top: 1px;
+              }
+            }
+          }
+        }
+
+        button {
+          border: none;
+          width: 100%;
+          border-radius: 3px;
+          height: 35px;
+        }
+
+        .search-categories {
+          input {
+            font-size: 14px;
+          }
+          button {
+            margin-top: 10px;
+            font-size: 14px;
+            border-radius: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: row-reverse;
+
+            i {
+              font-size: 12px;
+            }
+          }
+        }
+      }
+    }
+  }
+}

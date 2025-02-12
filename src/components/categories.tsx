@@ -11,6 +11,11 @@ export function Categories() {
   const [guardianNewsCategories, setGuardianNewsCategories] = useState([]);
   const [categorySearch, setCategorySearch] = useState("");
 
+  const handleCloseOffcanvas = () => {
+    const closeElem = document.getElementById("close-offcanvas");
+    closeElem.click();
+  };
+
   const handleFetchGuardianNewsCategories = async () => {
     try {
       const {
@@ -40,9 +45,11 @@ export function Categories() {
   // the news org, they use really basic terms for their categories
 
   const handleFindCustomCategory = async () => {
+    if (!categorySearch) return;
     try {
       dispatch(set_category(categorySearch));
       dispatch(set_searchText(categorySearch));
+      handleCloseOffcanvas();
     } catch (error) {
       console.log("error custom category", error);
     }
@@ -57,7 +64,10 @@ export function Categories() {
             {guardianNewsCategories.slice(0, 5).map((el) => (
               <li
                 key={el.id}
-                onClick={() => dispatch(set_category(el.id))}
+                onClick={() => {
+                  dispatch(set_category(el.id));
+                  handleCloseOffcanvas();
+                }}
                 className={
                   selectedCategory.toLowerCase() === el.id.toLowerCase()
                     ? "active"
@@ -70,9 +80,10 @@ export function Categories() {
             <select
               className='form-select'
               disabled={!guardianNewsCategories.length}
-              onChange={({ target: { value } }) =>
-                dispatch(set_category(value))
-              }
+              onChange={({ target: { value } }) => {
+                dispatch(set_category(value));
+                handleCloseOffcanvas();
+              }}
             >
               <option disabled selected>
                 See More
@@ -102,7 +113,10 @@ export function Categories() {
           {CATEGORIES.map((el) => (
             <li
               key={el}
-              onClick={() => dispatch(set_category(el))}
+              onClick={() => {
+                dispatch(set_category(el));
+                handleCloseOffcanvas();
+              }}
               className={
                 selectedCategory.toLowerCase() === el.toLowerCase()
                   ? "active"

@@ -88,9 +88,54 @@ export function NewsLanding() {
           <button>Subscribe</button>
         </div>
       </div>
+      <div className='mobile-search'>
+        <input
+          className='form-control'
+          placeholder='Search'
+          onChange={({ target: { value } }) => setSearch(value)}
+        />
+        <div className=''>
+          <button
+            data-bs-toggle='offcanvas'
+            data-bs-target='#staticBackdrop'
+            aria-controls='staticBackdrop'
+            className='filter-btn'
+          >
+            <i class='bi bi-filter'></i>
+            {selectedCategory && selectedCategory !== "all" ? (
+              <span className='selected-category'>{selectedCategory}</span>
+            ) : (
+              "Filter Category"
+            )}
+          </button>
+          <div
+            class='offcanvas offcanvas-end offcanvas-categories'
+            data-bs-backdrop='static'
+            tabindex='-1'
+            id='staticBackdrop'
+            aria-labelledby='staticBackdropLabel'
+          >
+            <div class='offcanvas-header'>
+              <h5 class='offcanvas-title' id='staticBackdropLabel'>
+                Select Section/Category
+              </h5>
+              <button
+                type='button'
+                className='btn-close'
+                data-bs-dismiss='offcanvas'
+                aria-label='Close'
+                id='close-offcanvas'
+              ></button>
+            </div>
+            <div class='offcanvas-body'>
+              <Categories />
+            </div>
+          </div>
+        </div>
+      </div>
       <div className='_news-body container-fluid'>
         <div className='row'>
-          <div className='col-3'>
+          <div className='col-md-3 col-12'>
             <div className='_sources'>
               <h4>Sources</h4>
               <ul>
@@ -119,25 +164,8 @@ export function NewsLanding() {
               </ul>
             </div>
             <Categories />
-            {/* <div className='_categories'>
-              <ul>
-                {CATEGORIES.map((el) => (
-                  <li
-                    key={el}
-                    onClick={() => dispatch(set_category(el))}
-                    className={
-                      selectedCategory.toLowerCase() === el.toLowerCase()
-                        ? "active"
-                        : ""
-                    }
-                  >
-                    {el}
-                  </li>
-                ))}
-              </ul>
-            </div> */}
           </div>
-          <div className='col-9'>
+          <div className='col-md-9 col-12'>
             <ul className='nav nav-underline filter-headers'>
               <li className='nav-item'>
                 <a
@@ -204,6 +232,14 @@ export function NewsLanding() {
                     alt='news-pic'
                     className='img-fluid'
                   />
+                  <a
+                    className='mobile-read-link-button'
+                    href={article?.url}
+                    target='_blank'
+                    rel='noreferrer'
+                  >
+                    Read more <i className='bi bi-box-arrow-in-up-right'></i>
+                  </a>
                 </div>
               ))
             )}
@@ -211,17 +247,20 @@ export function NewsLanding() {
               <div className='row footer'>
                 <div />
                 <CustomPagination />
-                <select
-                  className='form-control'
-                  onChange={({ target: { value } }) =>
-                    dispatch(set_filter({ limit: value }))
-                  }
-                  value={pagination.perPage}
-                >
-                  {[2, 5, 10, 20, 30, 40].map((el) => (
-                    <option key={el}>{el}</option>
-                  ))}
-                </select>
+                <div>
+                  <p>Page Limit</p>
+                  <select
+                    className='form-control'
+                    onChange={({ target: { value } }) =>
+                      dispatch(set_filter({ limit: value }))
+                    }
+                    value={pagination.perPage}
+                  >
+                    {[2, 5, 10, 20, 30, 40].map((el) => (
+                      <option key={el}>{el}</option>
+                    ))}
+                  </select>
+                </div>
               </div>
             ) : null}
           </div>

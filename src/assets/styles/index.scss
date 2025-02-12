@@ -60,6 +60,9 @@
       }
     }
   }
+  .mobile-search {
+    display: none;
+  }
   ._news-body {
     padding: 35px 50px;
     ._sources {
@@ -163,6 +166,10 @@
       gap: 10px;
       margin-bottom: 15px;
 
+      .mobile-read-link-button {
+        display: none;
+      }
+
       .details {
         width: 75%;
         p {
@@ -247,6 +254,14 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
+
+      div {
+        width: fit-content;
+
+        p {
+          display: none;
+        }
+      }
 
       .custom-pagination {
         width: fit-content;
