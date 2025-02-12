@@ -1,8 +1,8 @@
-import { put, takeEvery, call, select, all } from "@redux-saga/core/effects";
+import { put, takeEvery, call, select } from "@redux-saga/core/effects";
 import axios from "axios";
 import {
   fetch_guardian_news,
-  fetch_news,
+  // fetch_news,
   fetch_news_error,
   fetch_news_org,
   fetch_news_success,
@@ -11,7 +11,7 @@ import {
 import { newsData } from "./selector";
 import { NewsOrgParams, NewsState } from "../utils/types";
 import {
-  WORLD_NEWS,
+  // WORLD_NEWS,
   NEWS_ORG,
   GUARDIAN_NEWS,
   NEW_YORK_NEWS,

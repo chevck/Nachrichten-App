@@ -1,5 +1,4 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import axios from "axios";
 import { LoadingScreen } from "components/loading-screen";
 import React, { useEffect, useState, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -7,7 +6,7 @@ import {
   fetch_guardian_news,
   fetch_news_org,
   fetch_ny_news,
-  set_category,
+  // set_category,
   set_filter,
   set_loading,
   set_news_source,
@@ -16,11 +15,10 @@ import {
 import { newsData } from "../redux/selector";
 import { CustomPagination } from "components/pagination";
 import {
-  CATEGORIES,
   GUARDIAN_NEWS,
   NEW_YORK_NEWS,
   NEWS_ORG,
-  WORLD_NEWS,
+  // WORLD_NEWS,
 } from "utils/constants";
 import { EmptyState } from "components/empty";
 import { Categories } from "components/categories";
