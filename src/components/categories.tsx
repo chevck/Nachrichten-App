@@ -69,6 +69,7 @@ export function Categories() {
             ))}
             <select
               className='form-select'
+              disabled={!guardianNewsCategories.length}
               onChange={({ target: { value } }) =>
                 dispatch(set_category(value))
               }

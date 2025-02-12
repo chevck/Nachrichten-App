@@ -72,6 +72,7 @@ export const newsSlice = createSlice({
       state.selectedSource = payload;
       state.selectedCategory = "all";
       state.pagination.page = 0;
+      state.searchText = "";
     },
   },
 });
