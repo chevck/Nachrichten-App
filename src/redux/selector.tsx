@@ -7,6 +7,16 @@ interface StateData {
   };
   selectedCategory: string;
   searchText: string;
+  selectedSource: string;
+  hasError: boolean;
+  newsOrgNews: [];
+  newYorkNews: [];
+  guardianNews: [];
+  pagination: {
+    page: number;
+    perPage: number;
+    pages: number;
+  };
 }
 
 const newsState = (state = { news: {} }) => state?.news || {};
