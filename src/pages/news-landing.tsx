@@ -26,9 +26,9 @@ import { EmptyState } from "components/empty";
 export function NewsLanding() {
   const dispatch = useDispatch();
   const [selectedTab, setSelectedTab] = useState("for-you");
+  const [search, setSearch] = useState("");
   const {
     loading,
-    newsPerSource = {},
     selectedCategory,
     searchText,
     selectedSource: selectedNewsSource,
@@ -50,7 +50,6 @@ export function NewsLanding() {
   });
 
   useEffect(() => {
-    console.log({ selectedNewsSource });
     if (selectedNewsSource === NEWS_ORG) dispatch(fetch_news_org());
     if (selectedNewsSource === NEW_YORK_NEWS) dispatch(fetch_ny_news());
     if (selectedNewsSource === GUARDIAN_NEWS) dispatch(fetch_guardian_news());
@@ -63,29 +62,21 @@ export function NewsLanding() {
     selectedCategory,
   ]);
 
-  const handleSearch = ({ target: { value } }) => {
+  useEffect(() => {
+    if (!search) return;
     const fetchNewsTimeout = setTimeout(() => {
-      dispatch(set_searchText(value));
+      dispatch(set_searchText(search));
+      dispatch(set_loading(false));
     }, 1500);
     return () => clearTimeout(fetchNewsTimeout);
-  };
+  }, [dispatch, search]);
 
   const articles = useMemo(() => {
     if (selectedNewsSource === NEWS_ORG) return newsOrgNews;
     if (selectedNewsSource === NEW_YORK_NEWS) return newYorkNews;
     if (selectedNewsSource === GUARDIAN_NEWS) return guardianNews;
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [
-    guardianNews,
-    newYorkNews,
-    newsOrgNews,
-    selectedNewsSource,
-    // newYorkNews.length,
-    // newsOrgNews.length,
-    // guardianNews.length,
-  ]);
-
-  console.log({ articles });
+  }, [guardianNews, newYorkNews, newsOrgNews, selectedNewsSource]);
 
   return (
     <div className='news-landing-container'>
@@ -95,7 +86,7 @@ export function NewsLanding() {
           <input
             className='form-control'
             placeholder='Search'
-            onChange={handleSearch}
+            onChange={({ target: { value } }) => setSearch(value)}
           />
         </div>
         <div className='subscribe-section'>

@@ -24,7 +24,6 @@ export const newsSlice = createSlice({
   },
   reducers: {
     set_loading: (state, { payload }) => {
-      console.log({ payload });
       state.loading = payload;
     },
     set_category: (state, { payload }) => {
@@ -37,7 +36,6 @@ export const newsSlice = createSlice({
       state.searchText = payload?.toLowerCase();
     },
     set_filter: (state, { payload }) => {
-      console.log({ payload }, "filter payload");
       if (payload["limit"]) state.pagination.perPage = Number(payload.limit);
       if (payload["page"]) state.pagination.page = Number(payload.page);
     },
@@ -61,7 +59,6 @@ export const newsSlice = createSlice({
       state.hasError = true;
     },
     fetch_news_success: (state, { payload }) => {
-      console.log({ payload });
       if (payload.caller === NEWS_ORG) state.newsOrgNews = payload.data;
       if (payload.caller === NEW_YORK_NEWS) state.newYorkNews = payload.data;
       if (payload.caller === GUARDIAN_NEWS) state.guardianNews = payload.data;
