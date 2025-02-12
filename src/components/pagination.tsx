@@ -9,8 +9,8 @@ export function CustomPagination() {
     pagination: { pages = 0 },
   } = useSelector(newsData);
 
-  const handlePageClick = ({ selected }) => {
-    dispatch(set_filter({ page: Number(selected) + 1 }));
+  const handlePageClick = ({ selected }: { selected: number }) => {
+    dispatch(set_filter({ page: selected + 1 }));
   };
 
   return (

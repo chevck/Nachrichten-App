@@ -16,12 +16,14 @@ import {
 import { newsData } from "../redux/selector";
 import { CustomPagination } from "components/pagination";
 import {
+  CATEGORIES,
   GUARDIAN_NEWS,
   NEW_YORK_NEWS,
   NEWS_ORG,
   WORLD_NEWS,
 } from "utils/constants";
 import { EmptyState } from "components/empty";
+import { Categories } from "components/categories";
 
 export function NewsLanding() {
   const dispatch = useDispatch();
@@ -38,16 +40,6 @@ export function NewsLanding() {
     pagination,
     guardianNews,
   } = useSelector(newsData);
-
-  console.log({
-    loading,
-    newYorkNews,
-    newsOrgNews,
-    guardianNews,
-    selectedCategory,
-    searchText,
-    pagination,
-  });
 
   useEffect(() => {
     if (selectedNewsSource === NEWS_ORG) dispatch(fetch_news_org());
@@ -126,18 +118,10 @@ export function NewsLanding() {
                 ))}
               </ul>
             </div>
-            <div className='_categories'>
+            <Categories />
+            {/* <div className='_categories'>
               <ul>
-                {[
-                  "All",
-                  "Politics",
-                  "Entertainment",
-                  "Business",
-                  "Health",
-                  "Sports",
-                  "Technology",
-                  "Science",
-                ].map((el) => (
+                {CATEGORIES.map((el) => (
                   <li
                     key={el}
                     onClick={() => dispatch(set_category(el))}
@@ -151,7 +135,7 @@ export function NewsLanding() {
                   </li>
                 ))}
               </ul>
-            </div>
+            </div> */}
           </div>
           <div className='col-9'>
             <ul className='nav nav-underline filter-headers'>

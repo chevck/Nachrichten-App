@@ -111,13 +111,39 @@
         li {
           margin-bottom: 10px;
           padding: 5px 15px;
-          width: 75%;
+          width: 60%;
           cursor: pointer;
 
           &.active {
             background-color: $za_black_dim;
             border-radius: 10px;
           }
+        }
+      }
+
+      .search-categories,
+      select {
+        width: 60%;
+
+        h6 {
+          font-weight: 700;
+        }
+
+        input {
+          font-size: 14px;
+        }
+      }
+
+      .search-categories button {
+        border: none;
+        margin-top: 12px;
+        font-size: 14px;
+        border-radius: 6px;
+        width: 100%;
+        padding: 8px;
+
+        i {
+          margin-left: 10px;
         }
       }
     }
