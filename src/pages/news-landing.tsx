@@ -68,6 +68,8 @@ export function NewsLanding() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [guardianNews, newYorkNews, newsOrgNews, selectedNewsSource]);
 
+  console.log({ articles });
+
   return (
     <div className='news-landing-container'>
       <div className='_header'>
@@ -133,7 +135,7 @@ export function NewsLanding() {
       </div>
       <div className='_news-body container-fluid'>
         <div className='row'>
-          <div className='col-md-3 col-12'>
+          <div className='col-md-2 col-12'>
             <div className='_sources'>
               <h4>Sources</h4>
               <ul>
@@ -163,7 +165,7 @@ export function NewsLanding() {
             </div>
             <Categories />
           </div>
-          <div className='col-md-9 col-12'>
+          <div className='col-md-10 col-12'>
             <ul className='nav nav-underline filter-headers'>
               <li className='nav-item'>
                 <a

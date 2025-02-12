@@ -43,7 +43,7 @@ const newsOrgCall = ({
   pagination: { perPage, page },
 }) => {
   const params: Partial<NewsOrgParams> = {
-    apiKey: "6c57e118ca124b998ef9367fed6f479a",
+    apiKey: process.env.REACT_APP_NEWS_API,
     pageSize: perPage,
     page: page,
   };
@@ -88,7 +88,7 @@ const newYorkNewsCall = ({ searchText, category, pagination: { page } }) => {
     category?: string;
     perPage?: string;
   } = {
-    "api-key": "kLWUZetR7tiTZszHuVvLVtfVEC0zCoGs",
+    "api-key": process.env.REACT_APP_NEW_YORK_NEWS_API,
     page,
     perPage: "5",
   };
@@ -150,7 +150,7 @@ const guardianNewsCall = ({
     section?: string;
     "page-size": string;
   } = {
-    "api-key": "876931f9-c7d8-4f02-a5be-1ec1f2f347ee",
+    "api-key": process.env.REACT_APP_GUARDIAN_NEWS_API,
     page: page + 1, // guardian pagination starts at 1
     "page-size": perPage,
   };

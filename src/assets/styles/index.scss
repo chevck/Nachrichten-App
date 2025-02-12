@@ -146,7 +146,7 @@
         padding: 8px;
 
         i {
-          margin-left: 10px;
+          margin-right: 10px;
         }
       }
     }
@@ -199,6 +199,7 @@
           -webkit-box-orient: vertical;
           overflow: hidden;
           text-overflow: ellipsis;
+          text-align: justify;
         }
 
         a {

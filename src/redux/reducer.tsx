@@ -30,14 +30,17 @@ export const newsSlice = createSlice({
       state.loading = true;
       state.selectedCategory = payload?.toLowerCase();
       state.pagination.page = 0;
+      state.hasError = true;
     },
     set_searchText: (state, { payload }) => {
       state.loading = true;
       state.searchText = payload?.toLowerCase();
+      state.hasError = true;
     },
     set_filter: (state, { payload }) => {
       if (payload["limit"]) state.pagination.perPage = Number(payload.limit);
       if (payload["page"]) state.pagination.page = Number(payload.page);
+      state.hasError = true;
     },
     fetch_news_org: (state) => {
       state.loading = true;
@@ -56,7 +59,6 @@ export const newsSlice = createSlice({
     },
     fetch_news_error: (state) => {
       state.loading = false;
-      state.hasError = true;
     },
     fetch_news_success: (state, { payload }) => {
       if (payload.caller === NEWS_ORG) state.newsOrgNews = payload.data;
@@ -73,6 +75,7 @@ export const newsSlice = createSlice({
       state.selectedCategory = "all";
       state.pagination.page = 0;
       state.searchText = "";
+      state.hasError = false;
     },
   },
 });

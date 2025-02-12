@@ -105,7 +105,7 @@ export function Categories() {
             onChange={({ target: { value } }) => setCategorySearch(value)}
           />
           <button onClick={handleFindCustomCategory}>
-            Find Category <i className='bi bi-search'></i>
+            <i className='bi bi-search'></i>Find Category
           </button>
         </div>
       ) : (
