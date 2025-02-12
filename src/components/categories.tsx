@@ -23,7 +23,7 @@ export function Categories() {
           response: { results },
         },
       } = await axios.get(
-        `https://content.guardianapis.com/sections?api-key=876931f9-c7d8-4f02-a5be-1ec1f2f347ee`
+        `https://content.guardianapis.com/sections?api-key=${process.env.REACT_APP_GUARDIAN_NEWS_API}`
       );
       setGuardianNewsCategories(
         results.map((el) => ({
