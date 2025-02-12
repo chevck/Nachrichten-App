@@ -2,20 +2,21 @@ import { put, takeEvery, call, select } from "@redux-saga/core/effects";
 import axios from "axios";
 import {
   fetch_guardian_news,
-  // fetch_news,
   fetch_news_error,
   fetch_news_org,
   fetch_news_success,
   fetch_ny_news,
+  fetch_world_news,
 } from "./reducer";
 import { newsData } from "./selector";
 import { NewsOrgParams, NewsState } from "../utils/types";
 import {
-  // WORLD_NEWS,
   NEWS_ORG,
   GUARDIAN_NEWS,
   NEW_YORK_NEWS,
+  WORLD_NEWS,
 } from "../utils/constants";
+import { toast } from "react-toastify";
 
 const defaultImageLink =
   "https://img.freepik.com/free-photo/3d-rendering-illustration-letter-blocks-forming-word-news-white-background_181624-60840.jpg?semt=ais_hybrid";
@@ -74,9 +75,10 @@ function* fetchNewsOrg() {
       },
     });
   } catch (err) {
-    console.error("Error fetching news org data:", err);
     yield put({ type: fetch_news_error.type });
-    return;
+    return toast.error(
+      "Something went wrong fetching news org data. Please try again later."
+    );
   }
 }
 
@@ -135,6 +137,9 @@ function* fetchNewYorkNews() {
   } catch (error) {
     console.error("Error fetching news org data:", error);
     yield put({ type: fetch_news_error.type });
+    return toast.error(
+      "Something went wrong fetching new york news. Please try again later."
+    );
   }
 }
 
@@ -176,7 +181,6 @@ function* fetchGuardianNews() {
       searchText,
       pagination,
     });
-    console.log({ results });
     yield put({
       type: fetch_news_success.type,
       payload: {
@@ -188,6 +192,64 @@ function* fetchGuardianNews() {
   } catch (error) {
     console.error("Error fetching news org data:", error);
     yield put({ type: fetch_news_error.type });
+    return toast.error(
+      "Something went wrong fetching guardian news. Please try again later."
+    );
+  }
+}
+
+const worldNewsCall = ({
+  searchText,
+  category,
+  pagination: { page, perPage },
+}) => {
+  const params: {
+    "api-key": string;
+    offset: string;
+    text?: string;
+    categories?: string;
+    number: string;
+    language: string;
+  } = {
+    "api-key": process.env.REACT_APP_WORLD_NEWS_API,
+    number: perPage,
+    offset: (page * perPage).toString(),
+    language: "en",
+  };
+  if (searchText) params.text = searchText;
+  if (category && category !== "all") params.categories = category;
+  const queryString = new URLSearchParams(params).toString();
+  return axios.get(`https://api.worldnewsapi.com/search-news?${queryString}`);
+};
+
+function* fetchWorldNews() {
+  try {
+    const {
+      selectedCategory: category,
+      searchText,
+      pagination,
+    }: NewsState = yield select(newsData);
+    const {
+      data: { available, news },
+    } = yield call(worldNewsCall, {
+      searchText,
+      category,
+      pagination,
+    });
+    yield put({
+      type: fetch_news_success.type,
+      payload: {
+        caller: WORLD_NEWS,
+        totalResultsLength: available,
+        data: restructure(news),
+      },
+    });
+  } catch (error) {
+    console.error("Error fetching world news data:", error);
+    yield put({ type: fetch_news_error.type });
+    return toast.error(
+      "Something went wrong fetching world news. Please try again later."
+    );
   }
 }
 
@@ -195,6 +257,7 @@ function* newsSaga() {
   yield takeEvery(fetch_news_org.type, fetchNewsOrg);
   yield takeEvery(fetch_ny_news.type, fetchNewYorkNews);
   yield takeEvery(fetch_guardian_news.type, fetchGuardianNews);
+  yield takeEvery(fetch_world_news.type, fetchWorldNews);
 }
 
 export default newsSaga;

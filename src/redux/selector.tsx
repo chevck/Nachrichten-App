@@ -12,6 +12,7 @@ interface StateData {
   newsOrgNews: [];
   newYorkNews: [];
   guardianNews: [];
+  worldNews: [];
   pagination: {
     page: number;
     perPage: number;

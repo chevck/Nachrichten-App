@@ -6,7 +6,7 @@ import {
   fetch_guardian_news,
   fetch_news_org,
   fetch_ny_news,
-  // set_category,
+  fetch_world_news,
   set_filter,
   set_loading,
   set_news_source,
@@ -18,7 +18,7 @@ import {
   GUARDIAN_NEWS,
   NEW_YORK_NEWS,
   NEWS_ORG,
-  // WORLD_NEWS,
+  WORLD_NEWS,
 } from "utils/constants";
 import { EmptyState } from "components/empty";
 import { Categories } from "components/categories";
@@ -37,12 +37,14 @@ export function NewsLanding() {
     newsOrgNews,
     pagination,
     guardianNews,
+    worldNews,
   } = useSelector(newsData);
 
   useEffect(() => {
     if (selectedNewsSource === NEWS_ORG) dispatch(fetch_news_org());
     if (selectedNewsSource === NEW_YORK_NEWS) dispatch(fetch_ny_news());
     if (selectedNewsSource === GUARDIAN_NEWS) dispatch(fetch_guardian_news());
+    if (selectedNewsSource === WORLD_NEWS) dispatch(fetch_world_news());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     selectedNewsSource,
@@ -65,10 +67,9 @@ export function NewsLanding() {
     if (selectedNewsSource === NEWS_ORG) return newsOrgNews;
     if (selectedNewsSource === NEW_YORK_NEWS) return newYorkNews;
     if (selectedNewsSource === GUARDIAN_NEWS) return guardianNews;
+    if (selectedNewsSource === WORLD_NEWS) return worldNews;
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [guardianNews, newYorkNews, newsOrgNews, selectedNewsSource]);
-
-  console.log({ articles });
+  }, [guardianNews, newYorkNews, newsOrgNews, selectedNewsSource, worldNews]);
 
   return (
     <div className='news-landing-container'>
@@ -140,16 +141,15 @@ export function NewsLanding() {
               <h4>Sources</h4>
               <ul>
                 {[
-                  // { text: "World News", key: WORLD_NEWS },
                   { text: "News Org.", key: NEWS_ORG },
                   { text: "New York News", key: NEW_YORK_NEWS },
                   { text: "Guardian News", key: GUARDIAN_NEWS },
+                  { text: "World News", key: WORLD_NEWS },
                 ].map((el) => (
                   <li
                     key={el.key}
                     onClick={() => {
                       dispatch(set_news_source(el.key));
-                      setTimeout(() => dispatch(set_loading(false)), 2000);
                     }}
                     className={
                       el?.key?.toLowerCase() ===

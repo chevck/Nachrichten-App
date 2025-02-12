@@ -1,5 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { GUARDIAN_NEWS, NEW_YORK_NEWS, NEWS_ORG } from "utils/constants";
+import {
+  GUARDIAN_NEWS,
+  NEW_YORK_NEWS,
+  NEWS_ORG,
+  WORLD_NEWS,
+} from "utils/constants";
 
 export const newsSlice = createSlice({
   name: "news",
@@ -10,6 +15,7 @@ export const newsSlice = createSlice({
     guardianNews: [],
     newsOrgNews: [],
     newYorkNews: [],
+    worldNews: [],
     newsSources: [],
     newsPerSource: null,
     selectedSource: NEWS_ORG,
@@ -48,6 +54,9 @@ export const newsSlice = createSlice({
       // state.selectedFilter = NEWS_ORG;
       // state.newsOrgNews = [];
     },
+    fetch_world_news: (state) => {
+      state.loading = true;
+    },
     fetch_ny_news: (state) => {
       state.loading = true;
     },
@@ -64,6 +73,7 @@ export const newsSlice = createSlice({
       if (payload.caller === NEWS_ORG) state.newsOrgNews = payload.data;
       if (payload.caller === NEW_YORK_NEWS) state.newYorkNews = payload.data;
       if (payload.caller === GUARDIAN_NEWS) state.guardianNews = payload.data;
+      if (payload.caller === WORLD_NEWS) state.worldNews = payload.data;
       state.pagination.pages = Math.ceil(
         payload.totalResultsLength / state.pagination.perPage
       );
@@ -92,6 +102,7 @@ export const {
   fetch_ny_news,
   fetch_guardian_news,
   set_filter,
+  fetch_world_news,
 } = newsSlice.actions;
 
 export default newsSlice.reducer;
