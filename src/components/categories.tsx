@@ -1,7 +1,12 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { newsData } from "../redux/selector";
-import { CATEGORIES, GUARDIAN_NEWS, NEW_YORK_NEWS } from "utils/constants";
+import {
+  API_CONFIG,
+  CATEGORIES,
+  GUARDIAN_NEWS,
+  NEW_YORK_NEWS,
+} from "utils/constants";
 import { set_category, set_searchText } from "../redux/reducer";
 import axios from "axios";
 
@@ -23,7 +28,7 @@ export function Categories() {
           response: { results },
         },
       } = await axios.get(
-        `https://content.guardianapis.com/sections?api-key=${process.env.REACT_APP_GUARDIAN_NEWS_API}`
+        `https://content.guardianapis.com/sections?api-key=${API_CONFIG.GUARDIAN_API}`
       );
       setGuardianNewsCategories(
         results.map((el) => ({

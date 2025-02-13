@@ -179,28 +179,6 @@ export function NewsLanding() {
                   For You
                 </a>
               </li>
-              <li className='nav-item'>
-                <a
-                  className={`nav-link ${
-                    selectedTab === "top-stories" ? "active" : ""
-                  }`}
-                  href='#'
-                  onClick={() => setSelectedTab("top-stories")}
-                >
-                  Top Stories
-                </a>
-              </li>
-              <li className='nav-item'>
-                <a
-                  className={`nav-link ${
-                    selectedTab === "bookmarked" ? "active" : ""
-                  }`}
-                  href='#'
-                  onClick={() => setSelectedTab("bookmarked")}
-                >
-                  Bookmarked
-                </a>
-              </li>
             </ul>
             {(hasError || !articles.length) && !loading ? (
               <EmptyState

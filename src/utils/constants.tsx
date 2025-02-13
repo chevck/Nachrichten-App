@@ -14,3 +14,10 @@ export const CATEGORIES = [
   "Science",
   "Football",
 ];
+
+export const API_CONFIG = {
+  NEWS_API: process.env.REACT_APP_NEWS_API,
+  WORLD_NEWS_API: process.env.REACT_APP_WORLD_NEWS_API,
+  GUARDIAN_API: process.env.REACT_APP_GUARDIAN_NEWS_API,
+  NY_TIMES_API: process.env.REACT_APP_NEW_YORK_NEWS_API,
+} as const;

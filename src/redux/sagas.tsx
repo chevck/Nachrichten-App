@@ -15,6 +15,7 @@ import {
   GUARDIAN_NEWS,
   NEW_YORK_NEWS,
   WORLD_NEWS,
+  API_CONFIG,
 } from "../utils/constants";
 import { toast } from "react-toastify";
 
@@ -44,7 +45,7 @@ const newsOrgCall = ({
   pagination: { perPage, page },
 }) => {
   const params: Partial<NewsOrgParams> = {
-    apiKey: process.env.REACT_APP_NEWS_API,
+    apiKey: API_CONFIG.NEWS_API,
     pageSize: perPage,
     page: page,
   };
@@ -90,7 +91,7 @@ const newYorkNewsCall = ({ searchText, category, pagination: { page } }) => {
     category?: string;
     perPage?: string;
   } = {
-    "api-key": process.env.REACT_APP_NEW_YORK_NEWS_API,
+    "api-key": API_CONFIG.NY_TIMES_API,
     page,
     perPage: "5",
   };
@@ -155,7 +156,7 @@ const guardianNewsCall = ({
     section?: string;
     "page-size": string;
   } = {
-    "api-key": process.env.REACT_APP_GUARDIAN_NEWS_API,
+    "api-key": API_CONFIG.GUARDIAN_API,
     page: page + 1, // guardian pagination starts at 1
     "page-size": perPage,
   };
@@ -211,7 +212,7 @@ const worldNewsCall = ({
     number: string;
     language: string;
   } = {
-    "api-key": process.env.REACT_APP_WORLD_NEWS_API,
+    "api-key": API_CONFIG.WORLD_NEWS_API,
     number: perPage,
     offset: (page * perPage).toString(),
     language: "en",
